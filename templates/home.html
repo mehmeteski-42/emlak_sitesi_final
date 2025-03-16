@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Anasayfa - Emlak Sitesi{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Tüm İlanlar</h1>
+<div class="row">
+    {% for listing in listings %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ listing.title }}</h5>
+                <p class="card-text">Fiyat: {{ listing.price }} TL</p>
+                <p class="card-text">Tür: {{ listing.get_type_display }}</p>
+                <a href="{% url 'listing_detail' listing.id %}" class="btn btn-primary">Detaylar</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

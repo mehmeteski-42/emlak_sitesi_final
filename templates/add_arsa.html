@@ -1,0 +1,54 @@
+
+
+{% block title %}Arsa Yükleme Formu{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Yeni Arsa İlanı Yükleyin</h1>
+    <form method="post" action="/add_arsa" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Başlık Alanı -->
+        <div class="mb-3">
+            <label for="title" class="form-label">Başlık</label>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Arsanın başlığını girin" required>
+        </div>
+
+        <!-- Fiyat Alanı -->
+        <div class="mb-3">
+            <label for="price" class="form-label">Fiyat (TL)</label>
+            <input type="number" class="form-control" id="price" name="price" placeholder="Arsanın fiyatını girin" required>
+        </div>
+
+        <!-- Konum Alanı -->
+        <div class="mb-3">
+            <label for="location" class="form-label">Konum</label>
+            <input type="text" class="form-control" id="location" name="location" placeholder="Arsanın bulunduğu yeri girin" required>
+        </div>
+
+        <!-- Açıklama Alanı -->
+        <div class="mb-3">
+            <label for="description" class="form-label">Açıklama</label>
+            <textarea class="form-control" id="description" name="description" placeholder="Arsa hakkında detaylı açıklama yapın" rows="4"></textarea>
+        </div>
+
+        <!-- İletişim Numarası Alanı -->
+        <div class="mb-3">
+            <label for="contact_number" class="form-label">İletişim Numarası</label>
+            <input type="text" class="form-control" id="contact_number" name="contact_number" placeholder="Telefon numaranızı girin" required>
+        </div>
+
+        <!-- Fotoğraf Yükleme -->
+        <div class="mb-3">
+            <label for="photo" class="form-label">Arsa Fotoğrafı</label>
+            <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+        </div>
+
+        <!-- Gönder Butonu -->
+        <button type="submit" class="btn btn-primary w-100">İlanı Yükle</button>
+    </form>
+    <div class="text-center mt-3">
+        <a href="/" class="btn btn-secondary">Ana Sayfaya Dön</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ listing.title }} - Detaylar{% endblock %}
+
+{% block content %}
+<h1>{{ listing.title }}</h1>
+<p><strong>Fiyat:</strong> {{ listing.price }} TL</p>
+<p><strong>Tür:</strong> {{ listing.get_type_display }}</p>
+<p><strong>Açıklama:</strong> {{ listing.description }}</p>
+<p><strong>İletişim:</strong> {{ listing.contact_number }}</p>
+<a href="/" class="btn btn-secondary">Geri Dön</a>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}İlan Ekle{% endblock %}
+
+{% block content %}
+<h1>Yeni İlan Ekle</h1>
+<form method="post" action="{% url 'add_listing' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="title" class="form-label">Başlık</label>
+        <input type="text" class="form-control" id="title" name="title" required>
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Fiyat</label>
+        <input type="number" class="form-control" id="price" name="price" required>
+    </div>
+    <div class="mb-3">
+        <label for="type" class="form-label">Tür</label>
+        <select class="form-select" id="type" name="type" required>
+            <option value="ev">Ev</option>
+            <option value="arsa">Arsa</option>
+            <option value="tarla">Tarla</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Açıklama</label>
+        <textarea class="form-control" id="description" name="description"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="contact_number" class="form-label">İletişim Numarası</label>
+        <input type="text" class="form-control" id="contact_number" name="contact_number" required>
+    </div>
+    <button type="submit" class="btn btn-success">Kaydet</button>
+</form>
+{% endblock %}

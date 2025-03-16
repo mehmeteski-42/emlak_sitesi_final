@@ -1,0 +1,93 @@
+{% load static %}
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arama Sonuçları - Girişim Emlak</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Custom styling for the 'Detaylar' button */
+        .btn-custom {
+            background-color: #2980b9;  /* Set the background color */
+            color: white;                /* Set the text color */
+            border: none;                /* Remove the border */
+        }
+
+        .btn-custom:hover {
+            background-color: #051734;  /* Darker shade for hover effect */
+            color: white;                /* Keep text color white */
+        }
+
+        /* Custom navbar background color */
+        .navbar {
+            background-color: #051734;  /* Set navbar background color */
+        }
+
+        .navbar-brand, .navbar-nav .nav-link {
+            color: white !important;    /* Set text color to white */
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #2980b9 !important;  /* Hover color for links */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Girişim Emlak</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Ana Sayfa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">Hakkımızda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">İletişim</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Arama Sonuçları -->
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Arama Sonuçları: "{{ query }}"</h2>
+
+    {% if listings %}
+        <div class="row">
+            {% for listing in listings %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ listing.images.first.image.url }}" class="card-img-top" alt="{{ listing.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ listing.title }}</h5>
+                            <p class="card-text">{{ listing.description }}</p>
+                            <p><strong>Fiyat:</strong> {{ listing.price }} TL</p>
+                            <p><strong>Metrekare:</strong> {{ listing.square_meter }} m²</p>
+                            <p><strong>Tür:</strong> {{ listing.get_property_type_display }}</p>
+                            <a href="{% url 'ev_detail' pk=listing.pk %}" class="btn btn-custom">Detaylar</a>  <!-- Updated class here -->
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">Aradığınız kriterlere uygun ilan bulunamadı.</p>
+    {% endif %}
+</div>
+
+<!-- Bootstrap JS & Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
